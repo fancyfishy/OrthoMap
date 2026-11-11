@@ -1,0 +1,6 @@
+direction: ortho_1 -> phono
+reversible: true
+# y → j 是唯一实质转换。
+rules:
+  y:
+    - {to: j}

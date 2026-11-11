@@ -1,0 +1,13 @@
+code: zh-yue
+name: "粤语"
+description: >
+  多种拼音方案间的转换，目前本配置含有的正字法包括香港语言学会制订的粤拼的标准版，以及Fancy_Fishy魔改自用的方便手写汉字注音的短粤拼。
+
+nodes:
+  ortho_1:
+    label: "粤拼（标准）"
+    inventory: [aa, a, e, i, o, u, eo, oe, yu, b, p, m, f, d, t, n, l, g, k, ng, h, z, c, s, j, w, gw, kw, "1", "2", "3", "4", "5", "6"]
+
+  ortho_2:
+    label: "短粤拼（鱼咪自用）"
+    inventory: [a, ä, e, i, o, u, ö, ü, ŋ, b, p, m, f, d, t, n, l, g, k, ŋ, h, z, c, s, y, w, gw, kw, "¹", "²", "³", "⁴", "⁵", "⁶"]

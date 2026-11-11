@@ -1,0 +1,258 @@
+direction: ortho_1 -> phono
+reversible: false
+
+# ── 说明 ──────────────────────────────────────────────────────────────────────
+# 正字法 → 音系转写。
+#
+# 辅音宽/窄由相邻的正字法元音字母决定：
+#   broad  = 旁边是 $broad_v   (a o u ao ...)
+#   slender= 旁边是 $slender_v (e i ai ea ...)
+# "旁边"：看辅音左侧(after)或右侧(before)的紧邻 token。
+# 两侧都有时优先用左侧（已发声的元音）——通常语言规则也是这么说的。
+#
+# 元音音值（如 a+nn+C → au）也在此层确定，因为条件引用的是正字法辅音 token
+# (nn/ll/rr 等)，下一层（phono→ipa）里这些 token 已经被替换掉了。
+# ──────────────────────────────────────────────────────────────────────────────
+
+rules:
+
+  # ───── 固定 digraph/trigraph（不随宽窄变化）─────────────────────────────────
+  chd:
+    - {to: xk}
+  cn:
+    - {to: "kʰɾ"}
+  gn:
+    - {to: "kɾ"}
+  sr:
+    - {to: "s̪t̪ɾ"}
+  str:
+    - {to: "s̪t̪ɾ"}
+  h:
+    - {to: h}
+  fh:
+    - {to: ""}
+
+  # ───── b ─────────────────────────────────────────────────────────────────────
+  b:
+    - {to: "pj", after: $slender_v, before: $broad_v}
+    - {to: p}
+  bh:
+    - {to: "vj", after: $slender_v, before: $broad_v}
+    - {to: v}
+
+  # ───── c ─────────────────────────────────────────────────────────────────────
+  c:
+    - {to: "kʰʲ", after: $slender_v}
+    - {to: "kʰʲ", before: $slender_v}
+    - {to: "kʰ"}
+  ch:
+    - {to: ç, after: $slender_v}
+    - {to: ç, before: $slender_v}
+    - {to: x}
+
+  # ───── d ─────────────────────────────────────────────────────────────────────
+  d:
+    - {to: "tʲ", after: $slender_v}
+    - {to: "tʲ", before: $slender_v}
+    - {to: "t̪"}
+  dh:
+    - {to: ʝ, after: $slender_v}
+    - {to: ʝ, before: $slender_v}
+    - {to: ɣ}
+
+  # ───── f / ph ────────────────────────────────────────────────────────────────
+  f:
+    - {to: "fj", after: $slender_v, before: $broad_v}
+    - {to: f}
+  ph:
+    - {to: "fj", after: $slender_v, before: $broad_v}
+    - {to: f}
+
+  # ───── g / gh ────────────────────────────────────────────────────────────────
+  g:
+    - {to: "kʲ", after: $slender_v}
+    - {to: "kʲ", before: $slender_v}
+    - {to: k}
+  gh:
+    - {to: ʝ, after: $slender_v}
+    - {to: ʝ, before: $slender_v}
+    - {to: ɣ}
+
+  # ───── l / ll ────────────────────────────────────────────────────────────────
+  ll:
+    - {to: ʎ, after: $slender_v}
+    - {to: ʎ, before: $slender_v}
+    - {to: "l̪ˠ"}
+  l:
+    - {to: ʎ, before: "#", after: $slender_v}
+    - {to: l, after: $slender_v}
+    - {to: l, before: $slender_v}
+    - {to: "l̪ˠ"}
+
+  # ───── m / mh ────────────────────────────────────────────────────────────────
+  m:
+    - {to: "mj", after: $slender_v, before: $broad_v}
+    - {to: m}
+  mh:
+    - {to: "vj", after: $slender_v, before: $broad_v}
+    - {to: v}
+
+  # ───── n / nn / ng ───────────────────────────────────────────────────────────
+  nn:
+    - {to: ɲ, after: $slender_v}
+    - {to: ɲ, before: $slender_v}
+    - {to: "n̪ˠ"}
+  ng:
+    - {to: "ŋʲɡʲ", after: $slender_v}
+    - {to: "ŋʲɡʲ", before: $slender_v}
+    - {to: "ŋɡ"}
+  n:
+    - {to: ɲ, before: "#", after: $slender_v}
+    - {to: n, after: $slender_v}
+    - {to: n, before: $slender_v}
+    - {to: "n̪ˠ", before: "#"}
+    - {to: n}
+
+  # ───── p ─────────────────────────────────────────────────────────────────────
+  p:
+    - {to: "pʰj", after: $slender_v, before: $broad_v}
+    - {to: "pʰ"}
+
+  # ───── r / rr ────────────────────────────────────────────────────────────────
+  rr:
+    - {to: "rˠ"}
+  r:
+    - {to: "rˠ", before: "#"}
+    - {to: "ɾʲ", after: $slender_v}
+    - {to: "ɾʲ", before: $slender_v}
+    - {to: ɾ}
+
+  # ───── s / sh ────────────────────────────────────────────────────────────────
+  s:
+    - {to: ʃ, after: $slender_v}
+    - {to: ʃ, before: $slender_v}
+    - {to: "s̪"}
+  sh:
+    - {to: "hj", after: $slender_v, before: $broad_v}
+    - {to: h}
+
+  # ───── t / th ────────────────────────────────────────────────────────────────
+  t:
+    - {to: "tʰʲ", after: $slender_v}
+    - {to: "tʰʲ", before: $slender_v}
+    - {to: "t̪ʰ"}
+  th:
+    - {to: "hj", after: $slender_v, before: $broad_v}
+    - {to: h}
+
+  # ───── 元音 → 音系转写（条件依赖正字法辅音 token，必须在本层处理）──────────
+  # 格式同辅音：具体条件先，elsewhere 放最后。
+  # before_seq 的第二跳用 ["#"] 表示"词尾"。
+  a:
+    - {to: ɤ,   before: [dh, gh]}
+    - {to: "au", before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: "aː", before_seq: [[rr],        [$consonant_ortho, "#"]]}
+    - {to: "aː", before: [rn, rd]}
+    - {to: ə,   after: $consonant_ortho}
+    - {to: a}
+  à:
+    - {to: "aː"}
+  "ài":
+    - {to: "aː"}
+  ai:
+    - {to: ai,  before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: ai,  before: [bh, mh]}
+    - {to: "aː", before_seq: [[rr], [$consonant_ortho, "#"]]}
+    - {to: "aː", before: [rn, rd]}
+    - {to: ɪ,   after: $consonant_ortho}
+    - {to: a}
+  ao:
+    - {to: "ɯː"}
+  aoi:
+    - {to: "ɯi", before_seq: [[mh, bh], [$consonant_ortho, "#"]]}
+    - {to: "ɯː"}
+  e:
+    - {to: ə, after: $consonant_ortho}
+    - {to: e}
+  è:
+    - {to: "ɛː"}
+  ea:
+    - {to: ɤ,   before: [dh, gh]}
+    - {to: e,   before: [d, g, s]}
+    - {to: "au", before_seq: [[ll, nn], [$consonant_ortho, "#"]]}
+    - {to: "aː", before_seq: [[rr], [$consonant_ortho, "#"]]}
+    - {to: "aː", before: rn}
+    - {to: ja,  before: [ll, nn, rr]}
+    - {to: a,   before: [ll, nn, rr]}
+    - {to: ə,   after: $consonant_ortho}
+    - {to: ɛ}
+  "èa":
+    - {to: ia}
+  ei:
+    - {to: ei,  before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: ɪ,   after: $consonant_ortho}
+    - {to: e}
+  "èi":
+    - {to: "ɛː"}
+  eo:
+    - {to: ɔ}
+  "eò":
+    - {to: "jɔː", before: "#"}
+    - {to: "ɔː"}
+  eu:
+    - {to: "eː", before: m}
+    - {to: ia}
+  i:
+    - {to: "iː", before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: ɪ,    after: $consonant_ortho}
+    - {to: i}
+  ì:
+    - {to: "iː"}
+  ia:
+    - {to: "iə"}
+  "ìo":
+    - {to: "iə"}
+  io:
+    - {to: "uː", before_seq: [[ll, nn], [$consonant_ortho, "#"]]}
+    - {to: u,    before_seq: [[ll, nn], $vowel_ortho]}
+    - {to: i}
+  iu:
+    - {to: ju,  before: "#"}
+    - {to: "uː", before: [rr, rs]}
+    - {to: u}
+  "iù":
+    - {to: "uː"}
+  o:
+    - {to: "ɔu", before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: "ɔː", before_seq: [[rr], [$consonant_ortho, "#"]]}
+    - {to: "ɔː", before: [rn, rd]}
+    - {to: o,   before: [b, bh, g, gh, mh]}
+    - {to: ɔ}
+  ò:
+    - {to: "oː"}
+  oi:
+    - {to: "əi", before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: o,   before: [b, bh, g, gh, mh]}
+    - {to: ɤ}
+  "òi":
+    - {to: "ɔː"}
+  u:
+    - {to: "uː", before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: "uː", before: [rr, rn]}
+    - {to: u}
+  ù:
+    - {to: "uː"}
+  ua:
+    - {to: ua,  before: [m, n, ng]}
+    - {to: "uə"}
+  uai:
+    - {to: ua,  before: [m, n, ng]}
+    - {to: "uə"}
+  ui:
+    - {to: ɯ,   before: [m, n, ng, s]}
+    - {to: "ɯi", before: dh}
+    - {to: "ɯi", before_seq: [[ll, m, nn], [$consonant_ortho, "#"]]}
+    - {to: ɯ,   before_seq: [[ll, m, nn], $vowel_ortho]}
+    - {to: u}
+  "ùi":
+    - {to: "uː"}

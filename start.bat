@@ -1,0 +1,1 @@
+wt python "%~dp0cli\main.py"

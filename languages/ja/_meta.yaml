@@ -1,0 +1,25 @@
+code: ja
+name: "日语"
+description: >
+  本配置用于演示条件音变（识别训令式罗马字不显示的腭化）与多正字法节点。
+
+# 节点默认顺序：ipa → phono → ortho_1 → ortho_2 → ...
+nodes:
+  ipa:
+    label: "IPA"
+    inventory: [k, s, t, "tɕ", "ɕ", n, h, "ç", m, j, r, w, g, "dz", "dʑ", d, b, p, a, i, "ɯ", e, o]
+  phono:
+    label: "音系转写"
+    inventory: [k, s, t, n, h, m, j, r, w, g, z, d, b, p, a, i, u, e, o]
+  ortho_1:
+    label: "训令式罗马字"
+    inventory: [k, s, t, n, h, m, y, r, w, g, z, d, b, p, a, i, u, e, o]
+  ortho_2:
+    label: "平文式罗马字"
+    inventory: [k, s, t, n, h, m, y, r, w, g, z, d, b, p, a, i, u, e, o,
+                sh, ch, ts, "tsu", "chi", "shi", j]
+
+classes:
+  vowels: [a, i, u, e, o]
+  front_vowel: [i]
+  bilabial: [b, p, m]

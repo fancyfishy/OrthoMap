@@ -1,0 +1,22 @@
+direction: phono -> ipa
+reversible: false
+# 腭化：/t s h z/ 在 i 前变为对应的腭化音，其余环境不变。
+# 末尾 N（鼻韵尾）在双唇音前同化为 /m/，这里通过 before 集合实现。
+rules:
+  t:
+    - {to: "tɕ", before: i}
+    - {to: t}
+  s:
+    - {to: "ɕ", before: i}
+    - {to: s}
+  h:
+    - {to: "ç", before: i}
+    - {to: h}
+  z:
+    - {to: "dʑ", before: i}
+    - {to: dz}
+  n:
+    - {to: m, before: $bilabial}
+    - {to: n}
+  u:
+    - {to: "ɯ"}
